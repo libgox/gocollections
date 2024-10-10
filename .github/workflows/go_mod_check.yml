@@ -17,6 +17,6 @@ jobs:
         with:
           go-version: '1.18'
       - name: Run Go Mod Check Action
-        uses: Shoothzj/go-mod-check-action@main
+        uses: shoothzj/go-mod-check-action@main
         with:
           prohibitIndirectDepUpdate: 'true'
