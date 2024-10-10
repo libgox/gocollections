@@ -82,3 +82,12 @@ func TestSet_Range(t *testing.T) {
 	assert.True(t, visited[2], "Range should visit 2")
 	assert.True(t, visited[3], "Range should visit 3")
 }
+
+func TestSet_EmptyRange(t *testing.T) {
+	set := &Set[int]{}
+
+	// Use Range to iterate over the elements
+	set.Range(func(value int) bool {
+		return true
+	})
+}
