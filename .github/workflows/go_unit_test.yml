@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v5
         with:
-          go-version: '1.18'
+          go-version-file: "go.mod"
       - name: Run coverage
-        run: go test ./... -race -coverprofile=coverage.out -covermode=atomic
+        run: go test ./... -coverpkg=./opengemini/... -race -coverprofile=coverage.out -covermode=atomic

@@ -1,9 +1,10 @@
 package syncx
 
 import (
-	"github.com/stretchr/testify/assert"
 	"sync"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestTableBasic(t *testing.T) {

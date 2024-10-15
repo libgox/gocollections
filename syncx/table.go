@@ -1,8 +1,9 @@
 package syncx
 
 import (
-	"github.com/libgox/gocollections/table"
 	"sync"
+
+	"github.com/libgox/gocollections/table"
 )
 
 type SyncTable[K1 comparable, K2 comparable, V any] struct {
