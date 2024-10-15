@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v5
         with:
-          go-version: '1.18'
+          go-version-file: "go.mod"
       - name: Run Go Mod Check Action
         uses: shoothzj/go-mod-check-action@main
         with:
