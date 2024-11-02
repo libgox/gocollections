@@ -3,6 +3,10 @@ package set
 // Set represents a generic set
 type Set[T comparable] map[T]struct{}
 
+func NewWithCap[T comparable](cap int) Set[T] {
+	return make(Set[T], cap)
+}
+
 func (set Set[T]) Add(element T) {
 	set[element] = struct{}{}
 }
