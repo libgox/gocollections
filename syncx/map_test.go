@@ -36,3 +36,29 @@ func TestMap(t *testing.T) {
 		}
 	}
 }
+
+func TestMap_LoadOrStoreLazy(t *testing.T) {
+	m := &Map[string, int]{}
+
+	key := "lazyKey"
+	value := 42
+
+	fn := func() int {
+		return value
+	}
+
+	// Case 1: Key does not exist, so LoadOrStoreLazy should store and return the lazy value
+	if v, loaded := m.LoadOrStoreLazy(key, fn); loaded || v != value {
+		t.Fatalf("Expected (%v, %v), got (%v, %v)", value, false, v, loaded)
+	}
+
+	// Case 2: Key now exists, so LoadOrStoreLazy should return the existing value without calling fn
+	// Set up a different function that should not be called if the key already exists
+	fnUnexpected := func() int {
+		return 99
+	}
+
+	if v, loaded := m.LoadOrStoreLazy(key, fnUnexpected); !loaded || v != value {
+		t.Fatalf("Expected (%v, %v), got (%v, %v)", value, true, v, loaded)
+	}
+}

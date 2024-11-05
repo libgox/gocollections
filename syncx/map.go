@@ -32,6 +32,20 @@ func (m *Map[K, V]) LoadOrStore(key K, value V) (actual V, loaded bool) {
 	return actual, loaded
 }
 
+func (m *Map[K, V]) LoadOrStoreLazy(key K, fn func() V) (actual V, loaded bool) {
+	value, ok := m.Map.Load(key)
+	if ok {
+		actual = value.(V)
+		loaded = true
+	} else {
+		calculate := fn()
+		var aux any
+		aux, loaded = m.Map.LoadOrStore(key, calculate)
+		actual = aux.(V)
+	}
+	return actual, loaded
+}
+
 func (m *Map[K, V]) LoadAndDelete(key K) (value V, loaded bool) {
 	v, loaded := m.Map.LoadAndDelete(key)
 	if loaded {
