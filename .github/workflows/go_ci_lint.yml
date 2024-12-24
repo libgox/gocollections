@@ -1,4 +1,4 @@
-name: go ci Lint
+name: go ci lint
 on:
   push:
     branches:
